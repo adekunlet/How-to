@@ -1,0 +1,43 @@
+These are the steps covered since week one, which we will extend on in the final 3 sessions.   If you have any questions, please post them on teams, include your api name, region and the point number you are stuck on.
+
+1. Make a new lambda function and remember the name.
+    
+2. create an end point with a path param in the middle.
+ 
+3. add that lambda as the integration type
+ 
+4. Add the mapping template
+ 
+5. Give it a POST method
+ 
+6. Enable CORS from the API gateway actions
+ 
+7. Deploy that API
+ 
+8. Make a dynamoDB Table.  with id and an index of family_id (or the secondary id you decided to use in your CSV file)
+ 
+9. Install node (if you havent already)
+ 
+10. put parsedata.js (found in the week 3 teams channel) in the nodedj directory
+ 
+11.  Put cakes.csv file in the same directory and fill it with relevant data
+ 
+12.  Edit parsedata.js to make sure it marries the csv file
+ 
+13.  Edit parsedata.js to your POST end point
+ 
+14.  Edit your Lambda you made in point one and paste in the contents of session_3_upload_object_aws.txt found in Session 3 of serverless on teams
+ 
+15.  Amend that lambda to marry the payload and table name
+ 
+16.  navigate to your local node directory (in command prompt) where parsedata.js is and the csv file
+ 
+17. Type nodejs parsedata.js
+ 
+18. Debug (Teams please)
+ 
+19. Create a new GET endpoint with a path param.
+ 
+20. make a lambda with all steps and paste contents of getItems.txt from teams session 3
+ 
+21.  Use the index.html file as a template and see if you can parse your response (or just get a response to your browser)
