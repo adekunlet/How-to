@@ -1,0 +1,29 @@
+# used to build the cmapi
+
+#start with to create package.json file all the information about the project and dependencies
+#no need to use --save in newer versions on node
+npm init
+
+#where we have a carat^ it will download whatever specific version we want
+#using npm install express@4.16.4 to install a specific version of a dependency
+npm install express
+
+#create a new file called app.js this is where most of the code sits
+
+var express = require ('express');
+var app = express();
+var port = process.env.PORT || 3000;
+app.get('/',(req, res )=>{
+    res.send('Welcome to my API');
+})
+app.listen(port,()=>{
+    console.log('listening on port' + port);
+});
+
+#install some tooling
+# eslint to ensure we are writing code the proper way "-D adds the dependency to local project.
+npm i eslint -D
+
+# when you run something from scripts in package.json file it looks in the local project first for dependencies etc.. thats why we add lint to the sxcripts section.
+
+
