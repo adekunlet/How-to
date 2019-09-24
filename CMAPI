@@ -22,8 +22,13 @@ app.listen(port,()=>{
 
 #install some tooling
 # eslint to ensure we are writing code the proper way "-D adds the dependency to local project.
-npm i eslint -D
+npm i eslint -D # this adds it as a dependency
+npm run lint -- --init # this sets upo lint
+npm run lint # to execute the code to find errors 
 
-# when you run something from scripts in package.json file it looks in the local project first for dependencies etc.. thats why we add lint to the sxcripts section.
+# when you run something from scripts section in package.json file it looks in the local project first for dependencies to run etc.. thats why we add lint to the sxcripts section.
+npm install nodemon # handles environmental stuff and 
+
+
 
 
