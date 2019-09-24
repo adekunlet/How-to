@@ -27,7 +27,30 @@ npm run lint -- --init # this sets upo lint
 npm run lint # to execute the code to find errors 
 
 # when you run something from scripts section in package.json file it looks in the local project first for dependencies to run etc.. thats why we add lint to the sxcripts section.
-npm install nodemon # handles environmental stuff and 
+npm install nodemon # handles environmental stop and start stuff.
+
+# create a json file with the data to be inserted intp mongodb
+
+db.items.insert([
+{
+	title: 'War and Peace The Time Machine The Time Machine The Time Machine The Time Machine',
+	description: 'Historical Fiction Historical Fiction Historical Fiction Historical Fiction Historical Fiction Historical FictionThis is the best laptop in the world and is still in warranty This is the best laptop in the world and is still in warranty ',
+	category:'car',
+	baseValue: 10.00,
+	baseCurrency: 'BTC',
+},
+{
+	title: 'Les Misérables The Time Machine The Time Machine The Time Machine The Time Machine',
+	description: 'Historical FictionThis is the best laptop in the world and is still in warranty This is the best laptop in the world and is still in warranty This is the best laptop in the world and is still in warranty This is the best laptop in the world and is still in warranty ',
+	category:'book',
+	baseValue: 2198.35,
+	baseCurrency: 'ETH'
+}
+])
+
+# then use the command to insert the data directly from the json file into mongodb
+mongo itemAPI < itemJson.js
+
 
 
 
