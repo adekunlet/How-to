@@ -51,6 +51,14 @@ db.items.insert([
 # then use the command to insert the data directly from the json file into mongodb
 mongo itemAPI < itemJson.js
 
+# unit testing with mocha, should and sinon
+mocha is a testing framework
+should is an assertion framework
+sinon is for moquing
+
+#we will use "design and build a chat application with chat io"
+
+
 
 
 
