@@ -107,3 +107,112 @@ app.post('/lions', function(req, res) {
 
 app.listen(3000);
 console.log('on port 3000');
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// USING ROUTING IN EXPRESS
+// TODO: mount the tigers route with a a new router just for tigers
+// exactly like lions below
+var express = require('express');
+var bodyParser = require('body-parser');
+var app = express();
+var _ = require('lodash');
+var morgan = require('morgan');
+
+var lionRouter = require('./lions');
+var tigerRouter = require('./tigers');
+
+app.use(morgan('dev'))
+app.use(express.static('client'));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+// this is called mounting. when ever a req comes in for
+// '/lion' we want to use this router
+app.use('/lions', lionRouter);
+app.use('/tigers', tigerRouter);
+
+app.use(function(err, req, res, next) {
+  if (err) {
+    console.log(err.message);
+    res.status(500).send(error);
+  }
+});
+
+
+app.listen(3000);
+console.log('on port 3000');
+
+
+// TODO: make a new router for the tigers resource
+// and make some REST routes for it, exactly like for lions
+// make a middleware that just logs the word 'tiger' to the console
+// when a request comes in to the server
+
+var tigerRouter = require('express').Router();
+var _ = require('lodash');
+
+var tigers = [];
+var id = 0;
+
+var updateId = function(req, res, next) {
+  if (!req.body.id) {
+    id++;
+    req.body.id = id + '';
+  }
+  next();
+};
+
+tigerRouter.param('id', function(req, res, next, id) {
+  var todo = _.find(todos, {id: id});
+
+  if (todo) {
+    req.todo = todo;
+    next();
+  } else {
+    res.send();
+  }
+});
+
+tigerRouter.route('/')
+.get(function(req, res){
+    res.json(tigers);
+})
+.post(updateId, function(req, res) {
+    var tiger = req.body;
+    tigers.push(tiger);
+    res.json(tiger);
+})
+.delete(function(req, res){
+    var tigerId = _.findIndex(tigers, {id: req.params.id});
+    tigers.splice(tigerId,1);
+    res.json(req.tiger);
+});
+
+tigerRouter.route('/:id')
+.get(function(req, res){
+    var tiger = req.todo;
+    res.json(tiger || {});
+ })
+.put(function(req, res) {
+    var update = req.body;
+    if (update.id) {
+      delete update.id
+    }
+    var tiger = _.findIndex(tigers, {id: req.params.id});
+    if (!tigers[tiger]) {
+      res.send();
+    } else {
+      var updatedTiger = _.assign(tigers[tiger], update);
+      res.json(updatedTiger);
+    }
+  });
+
+tigerRouter.get('/tiger', function(req, res){
+    res.json(tigers);
+  });
+
+module.exports = tigerRouter;
+
