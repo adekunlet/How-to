@@ -1,0 +1,8 @@
+#using morgan for logging stuff
+
+var morgan = require('morgan');
+
+app.use(function(req , res, next){
+    console.log('The body', req.body);
+    next();
+};
