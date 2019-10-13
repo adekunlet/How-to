@@ -1,0 +1,3 @@
+Mocha runs the test using describe etc
+Supertest calls the server and handles routing
+Chai makes the assertions
