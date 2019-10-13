@@ -1,0 +1,25 @@
+// to use mongodatabase
+
+// launch mongo
+mongod
+
+// see status of mongo
+mongo
+
+// view databases 
+show dbs
+
+//create a database
+use tesdb
+
+// create a collection
+db.createCollection('testCollection')
+
+// view collections
+show collections
+
+// insert documents into the collection
+db.testCollection.insert({name:'testName', age:12, numbers:[1,2,3]})
+
+// view documents in collection
+db.testCollection.find()
