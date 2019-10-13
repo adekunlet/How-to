@@ -1,3 +1,118 @@
-Mocha runs the test using describe etc
-Supertest calls the server and handles routing
-Chai makes the assertions
+//Mocha runs the test using bdd style describe etc
+//Supertest calls the server and handles routing
+//Chai makes the assertions
+
+// in the package.json file the test variable should reference "mocha server/spec.js"
+ "scripts": {
+    "test": "mocha server/spec.js"
+  },
+  
+//run the test 
+npm test
+
+// sample tests
+
+var app = require('./server');
+var request = require('supertest');
+var expect = require('chai').expect;
+
+require('colors');
+
+// TODO: make tests for the other CRUD routes
+// DELETE, UPDATE, PUT, GET ONE
+// to run the test type mocha server/specs.js
+
+describe('LIONS'.yellow, function(){
+
+  // can use a before and beforeEach which is a call back function that is executed before it
+  beforeEach(function(){
+    console.log('before each test')
+  });
+
+  // can use a after and afterEach which is a call back function that is executed aftereards
+  afterEach(function(){
+    console.log('after each test')
+  });
+
+  var lion = {name:'name1', age:'12', pride:'pride1', gender:'male', id:'1' /**id is only used to verify the response as we know it will be 1**/ };
+
+  it('should create a lion', function(done){
+    request(app)
+    .post('/lions')
+    .send(lion)
+    .set('Accept','Application/json')
+    .expect('Content-Type', /json/)
+    .expect(201) //200 is also a pass
+    .end(function(err,resp){
+      var result = resp.body;
+      expect(resp.body).to.be.an('object');
+      expect(result.name).to.deep.equal('name1');
+      expect(result.age).to.deep.equal('12');
+      expect(result.pride).to.deep.equal('pride1');
+      expect(result.gender).to.deep.equal('male');
+      // or we can simply do
+      expect(result).eql(lion);
+      done();
+      }
+    )
+  });
+
+  it('should get all lions', function(done) {
+    request(app)
+      .get('/lions')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function(err, resp) {
+        expect(resp.body).to.be.an('array');
+        expect(resp.body[0]).to.eql(lion);
+        done();
+      })
+  });
+
+  it('should delete a lion', function(done) {
+    request(app)
+      .post('/lions')
+      .send(lion)
+      .set('Accept', 'application/json')
+      .end(function(err,resp){
+        var deletedLion = resp.body;
+        request(app)
+          .delete('/lions/' + lion.id)
+          .end(function(err, resp){
+            expect(resp.body).to.eql(deletedLion);
+            done();
+          })
+      })
+    });
+
+  it('should update a lion', function(done){
+    request(app)
+      .post('/lions')
+      .send(lion)
+      .set('Accept', 'application/json')
+      .end(function(err,resp){
+        var lionToUpdate = resp.body;
+        console.log('lionToUpdate');
+        console.log(lionToUpdate);
+        // change the name of the lion to be updated
+        lionToUpdate.name = 'king';
+        request(app)
+          .put('/lions/' + lion.id)
+          .send(lionToUpdate)
+          .end(function(err, resp){
+            expect(resp.body).to.eql(lionToUpdate);
+            done();
+          })
+          console.log('lionToUpdate');
+          console.log(lionToUpdate);
+      })
+    });
+
+
+});
+
+
+
+
+
