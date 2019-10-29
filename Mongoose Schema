@@ -1,0 +1,77 @@
+var mongoose = require('mongoose');
+
+// first make a new schema for our model
+// this is just the blueprint and how we tell mongoose to
+// handle our data. Mongo doesn't care.
+var TodoSchema = new mongoose.Schema({
+  // we define a property for this model object
+  // then what type it is, in this case, the
+  // completed property will has to be a Boolean
+  completed: Boolean,
+
+  // we can add validations too
+  // just use an object literal here instead
+  // just be sure to have a type property on that object
+  // to tell mongoose what type this property will be
+  content: {
+    type: String, // will be a string
+    required: true, // will not create a todo without this content property
+  }
+});
+// no matter what we pass in as a name for the model,
+// mongoose will lowercase it and pluralize it for the collection.
+// so below the name for the model is 'Todo', mongoose will
+// convert that to 'todos' in the databse.
+// TodoModel is the model we'll use in node to CRUD so
+// it makes sense to export this;
+var TodoModel = mongoose.model('Todo', TodoSchema);
+module.export = TodoModel;
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------
+
+var DogSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    //enforce that no two dogs can have the same name
+    unique: true
+  },
+
+  whenAdopted: Date,
+
+  hasShots: Boolean,
+
+  collarCode: Buffer,
+
+  age: {
+    type: Number,
+    // setup min and mx validations
+    min: 0,
+    max: 30
+  },
+
+  // toys is an array and can store many types of things really
+  // we can choose to model the things it stores or not. It can
+  // can also store other schemas :). We can put any of the above types
+  // or leave it blank
+  toys: [],
+
+  // nested objects work too
+  location: {
+    state: String,
+    city: String,
+    zip: Number
+  },
+
+  // we have a relationship here. A dog belongs to an owner.
+  // we can store the owners id here on the owner field. ObjectId are
+  // ids in mongoose. the ref key is telling mongoose what model that
+  // id belongs too. Helpful for when we ask the dog who its owner is
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'owner',
+    required: true
+  }
+});
