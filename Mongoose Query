@@ -70,3 +70,35 @@ Model.findOne({name: 'Jan'}, function(err, doc) {
           
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
+
+// promises / joining tables
+
+var DogSchema = new mongoose.Schema({
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'person'
+  },
+  name: String
+});
+
+var PersonSchema = new mongoose.Schema({
+  name: String
+});
+
+var Dog = mongoose.model('dog', DogSchema);
+var Person = mongoose.model('person', PersonSchema);
+
+// find all dogs and populate their owners
+// this will grab the ids on the owners field
+// and go to the ref, which is the person model
+// and grab the person doc with the matching id
+// and place the object on the owners field
+var promise = Dog.find({})
+  .populate('owner')
+  .exec();
+
+  promise.then(function(dogs) {
+
+  }, function(err) {
+
+  });
