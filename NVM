@@ -1,3 +1,6 @@
+# Install the version that you would like 
+nvm install 6.1.0
+
 https://github.com/nvm-sh/nvm#usage
 
 Usage
