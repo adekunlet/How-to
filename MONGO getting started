@@ -50,3 +50,8 @@ Todo.create({
 }).then(function(err, todo) {
   console.log(err, todo);
 });
+
+/// importing dara
+mongoimport --db test --collection inventory ^
+          --authenticationDatabase admin --username <user> --password <password> ^
+          --drop --file ~\downloads\inventory.crud.json
