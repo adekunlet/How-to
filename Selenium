@@ -1,0 +1,54 @@
+# WebDriverException: Element is not clickable at point (x, y)
+This is a typical org.openqa.selenium.WebDriverException which extends java.lang.RuntimeException.
+
+The fields of this exception are :
+
+BASE_SUPPORT_URL : protected static final java.lang.String BASE_SUPPORT_URL
+DRIVER_INFO : public static final java.lang.String DRIVER_INFO
+SESSION_ID : public static final java.lang.String SESSION_ID
+About your individual usecase, the error tells it all :
+
+WebDriverException: Element is not clickable at point (x, y). Other element would receive the click 
+It is clear from your code block that you have defined the wait as WebDriverWait wait = new WebDriverWait(driver, 10); but you are calling the click() method on the element before the ExplicitWait comes into play as in until(ExpectedConditions.elementToBeClickable).
+
+Solution
+The error Element is not clickable at point (x, y) can arise from different factors. You can address them by either of the following procedures:
+
+1. Element not getting clicked due to JavaScript or AJAX calls present
+
+Try to use Actions Class:
+
+WebElement element = driver.findElement(By.id("navigationPageButton"));
+Actions actions = new Actions(driver);
+actions.moveToElement(element).click().build().perform();
+2. Element not getting clicked as it is not within Viewport
+
+Try to use JavascriptExecutor to bring the element within the Viewport:
+
+WebElement myelement = driver.findElement(By.id("navigationPageButton"));
+JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+jse2.executeScript("arguments[0].scrollIntoView()", myelement); 
+
+3. The page is getting refreshed before the element gets clickable.
+
+In this case induce ExplicitWait i.e WebDriverWait as mentioned in point 4.
+
+4. Element is present in the DOM but not clickable.
+
+In this case induce ExplicitWait with ExpectedConditions set to elementToBeClickable for the element to be clickable:
+
+WebDriverWait wait2 = new WebDriverWait(driver, 10);
+wait2.until(ExpectedConditions.elementToBeClickable(By.id("navigationPageButton")));
+5. Element is present but having temporary Overlay.
+
+In this case, induce ExplicitWait with ExpectedConditions set to invisibilityOfElementLocated for the Overlay to be invisible.
+
+WebDriverWait wait3 = new WebDriverWait(driver, 10);
+wait3.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("ele_to_inv")));
+6. Element is present but having permanent Overlay.
+
+Use JavascriptExecutor to send the click directly on the element.
+
+WebElement ele = driver.findElement(By.xpath("element_xpath"));
+JavascriptExecutor executor = (JavascriptExecutor)driver;
+executor.executeScript("arguments[0].click();", ele);
