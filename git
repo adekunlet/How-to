@@ -1,0 +1,3 @@
+## frequently used git commands
+
+git remote add source <git repo>
