@@ -1,6 +1,8 @@
 # Frequently used git commands
 git remote add new-repo-name git-repo-remote-add
+
 git remote -v
+
 git push repo-name branch-name
   
 ========================================
