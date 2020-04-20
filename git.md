@@ -1,4 +1,5 @@
 # Frequently used git commands
+
 git remote add new-repo-name git-repo-remote-add
 
 git remote -v
@@ -6,6 +7,20 @@ git remote -v
 git push repo-name branch-name
   
 ========================================
+
+# What you need to do to update the remote is to force push your local changes to master:
+
+git checkout master
+
+git reset --hard e3f1e37
+
+git push --force origin master
+
+# Then to prove it (it won't print any diff)
+
+git diff master..origin/master
+
+
 
 # Branching and merging strategy
 https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
