@@ -1,22 +1,17 @@
-========================================
 # Frequently used git commands
-========================================
 
-
-# Git Tagging
-========================================
+## Git Tagging
 
 https://git-scm.com/book/en/v2/Git-Basics-Tagging
-## Annotated Tags</br>
+
+## Annotated Tags
+
 Creating an annotated tag in Git is simple. The easiest way is to specify -a when you run the tag command:</br>
-
 $ git tag -a v1.4 -m "my version 1.4"</br>
-
 You can see the tag data along with the commit that was tagged by using the git show command
 
 ## Lightweight Tags
-Another way to tag commits is with a lightweight tag. This is basically the commit checksum stored in a file — no other information is kept. To create a lightweight tag, don’t supply any of the -a, -s, or -m options, just provide a tag name:
-
+Another way to tag commits is with a lightweight tag. This is basically the commit checksum stored in a file — no other information is kept. To create a lightweight tag, don’t supply any of the -a, -s, or -m options, just provide a tag name:</br>
 $ git tag v1.4-lw
 
 ## to view tags
