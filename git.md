@@ -2,9 +2,10 @@
 # Frequently used git commands
 ========================================
 
-========================================
+
 # Git Tagging
 ========================================
+
 https://git-scm.com/book/en/v2/Git-Basics-Tagging
 ## Annotated Tags</br>
 Creating an annotated tag in Git is simple. The easiest way is to specify -a when you run the tag command:</br>
@@ -36,7 +37,6 @@ git tag
 
 git push origin --tags
 
-========================================
 # Git remote commands
 ========================================
 
@@ -58,7 +58,7 @@ git push --force origin master
 
 git diff master..origin/master
 
-========================================
+
 # Branching and merging strategy
 ========================================
 
