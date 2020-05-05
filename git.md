@@ -5,6 +5,7 @@
 ========================================
 # Git Tagging
 ========================================
+https://git-scm.com/book/en/v2/Git-Basics-Tagging
 ## Annotated Tags</br>
 Creating an annotated tag in Git is simple. The easiest way is to specify -a when you run the tag command:</br>
 
