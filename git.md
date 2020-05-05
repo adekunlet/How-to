@@ -21,6 +21,21 @@ $ git tag v1.4-lw
 ## to view tags
 $ git tag
 
+## Tags sample workflow
+Create a lightweight tag</br>
+Create an annotated tag</br>
+Push the tags to the remote repository</br>
+git checkout master
+
+# Lightweight tag
+git tag my_lightweight_tag
+
+# Annotated tag
+git tag -a v1.0 -m ‘Version 1.0’
+git tag
+
+git push origin --tags
+
 ========================================
 # Git remote commands
 ========================================
