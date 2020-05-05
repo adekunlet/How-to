@@ -1,4 +1,28 @@
+========================================
 # Frequently used git commands
+========================================
+
+========================================
+# Git Tagging
+========================================
+## Annotated Tags</br>
+Creating an annotated tag in Git is simple. The easiest way is to specify -a when you run the tag command:</br>
+
+$ git tag -a v1.4 -m "my version 1.4"</br>
+
+You can see the tag data along with the commit that was tagged by using the git show command
+
+## Lightweight Tags
+Another way to tag commits is with a lightweight tag. This is basically the commit checksum stored in a file — no other information is kept. To create a lightweight tag, don’t supply any of the -a, -s, or -m options, just provide a tag name:
+
+$ git tag v1.4-lw
+
+## to view tags
+$ git tag
+
+========================================
+# Git remote commands
+========================================
 
 git remote add new-repo-name git-repo-remote-add
 
@@ -6,8 +30,6 @@ git remote -v
 
 git push repo-name branch-name
   
-========================================
-
 # What you need to do to update the remote is to force push your local changes to master:
 
 git checkout master
@@ -20,9 +42,10 @@ git push --force origin master
 
 git diff master..origin/master
 
-
-
+========================================
 # Branching and merging strategy
+========================================
+
 https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
 
 # Github Commands
